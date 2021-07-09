@@ -1,0 +1,121 @@
+create table ISSUESLISTS
+(
+    ID   serial primary key,
+    NAME varchar(30) not null
+);
+
+create table ISSUES
+(
+    ID                serial primary key,
+    ISSUELIST_ID      bigint unsigned not null,
+    SUMMARY           varchar(30),
+    DESCRIPTION       varchar(500),
+    USER_ID_ASSIGEDTO bigint unsigned not null,
+    FOREIGN KEY (ISSUELIST_ID) REFERENCES ISSUESLISTS (ID),
+    FOREIGN KEY (USER_ID_ASSIGEDTO) REFERENCES users (ID)
+);
+
+insert into ISSUESLISTS (NAME)
+value ('Done');
+insert into ISSUESLISTS (NAME)
+values ('In progress');
+insert into ISSUESLISTS (NAME)
+values ('ToDo');
+
+commit;
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (1,
+        'Today\'s plan.',
+        'Create tasks plan for today.',
+        1);
+
+        insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (1,
+        'Koffe!',
+        'Buy a coffee !!!',
+        1);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (1,
+        'Schedule.',
+        'Prepare today\'s appointment list. ',
+        4);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (1,
+        'E-mails.',
+        'Send today\'s e-mails.',
+        2);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (1,
+        'Costs juxtaposition.',
+        'Prepare monthly report: costs juxtaposition. ',
+        3);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (2,
+        'Report to "AnyName" company.',
+        'Preparing detailed report for the "ABC Comp.',
+        2);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (2,
+        'Order 100 for "XYZ".',
+        'Production t-shirts for "XYZ".',
+        5);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (2,
+        'Order 95.',
+        'Advertising print for "P&K".',
+        3);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (2,
+        'Contract with "W-B-M".',
+        'New loan conditions negotiations.',
+        4);
+
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (2,
+        'Car Fleet diagnosis.',
+        'Annual service process.',
+        1);
+
+
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (3,
+        'Confirm supply.',
+        'Call to warehouse.',
+        5);
+
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (3,
+        'Gathering prepare.',
+        'Prepare documents and analyses for today\s gathering.',
+        3);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (3,
+        'Confirm presence!',
+        'Call everyone about today''s gathering.',
+        3);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (3,
+        '"AnyName" project.',
+        'Check progress with realisation "AnyName" project.',
+        2);
+
+insert into ISSUES  (ISSUELIST_ID, SUMMARY,DESCRIPTION,USER_ID_ASSIGEDTO)
+values (3,
+        'CO report!',
+        'Prepare report to CO.',
+        3);
+
+commit;
