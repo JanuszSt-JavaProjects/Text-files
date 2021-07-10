@@ -1,0 +1,14 @@
+select *
+from issueslists
+         join issues on issueslists.ID = issues.ISSUELIST_ID;
+
+
+select *
+from issues
+         join users u on u.ID = issues.USER_ID_ASSIGEDTO;
+
+
+select U.FIRSTNAME, U.LASTNAME, COUNT(*) as Issues_Number
+from users U
+         join issues on U.ID = issues.USER_ID_ASSIGEDTO
+group by U.LASTNAME, U.FIRSTNAME;
