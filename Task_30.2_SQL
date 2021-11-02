@@ -1,0 +1,43 @@
+alter table BOOKS
+    add BESTSELLER boolean default 0;
+
+drop procedure if exists UpdateBestsellers;
+DELIMITER $$
+create PROCEDURE UpdateBestsellers()
+BEGIN
+
+    DECLARE CHECKED_BOOK int;
+    DECLARE RENT_COUNT int;
+    DECLARE FINISHED int default 0;
+
+    DECLARE READERS_CURSOR CURSOR
+        FOR SELECT BOOK_ID FROM books;
+
+    DECLARE CONTINUE HANDLER
+        FOR NOT FOUND SET FINISHED = 1;
+
+    OPEN READERS_CURSOR;
+
+    WHILE (FINISHED = 0)
+        DO
+            FETCH READERS_CURSOR INTO CHECKED_BOOK;
+
+            IF (FINISHED = 0) THEN
+                SELECT COUNT(*)
+                FROM rents
+                WHERE BOOK_ID = CHECKED_BOOK
+                INTO RENT_COUNT;
+            END IF;
+
+            IF (RENT_COUNT > 2) THEN
+                UPDATE books
+                SET BESTSELLER = true
+                WHERE BOOK_ID = CHECKED_BOOK;
+                commit;
+            end IF;
+        END WHILE;
+    CLOSE READERS_CURSOR;
+END $$
+DELIMITER ;
+
+call UpdateBestsellers();
